@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAgentStore } from '../store/agentStore';
-import { healthCheck } from '../services/api';
+import { healthCheck, resetHistory } from '../services/api';
 
 export function SettingsPage() {
   const { backendUrl, setBackendUrl, clearMessages } = useAgentStore();
@@ -54,12 +54,27 @@ export function SettingsPage() {
       <hr style={{ border: 'none', borderTop: '1px solid #222', margin: '28px 0' }} />
 
       <h3 style={{ color: '#fff', fontSize: 15, marginBottom: 12 }}>Session</h3>
-      <button
-        onClick={() => { clearMessages(); setStatus('Chat history cleared.'); }}
-        style={btnStyle('#c0392b')}
-      >
-        Clear Chat History
-      </button>
+      <div style={{ display: 'flex', gap: 10 }}>
+        <button
+          onClick={async () => {
+            clearMessages();
+            await resetHistory();
+            setStatus('Chat history and memory cleared.');
+          }}
+          style={btnStyle('#c0392b')}
+        >
+          Clear Chat History
+        </button>
+        <button
+          onClick={async () => {
+            await resetHistory();
+            setStatus('Backend conversation memory reset.');
+          }}
+          style={btnStyle('#1e1e2e')}
+        >
+          Reset Conversation
+        </button>
+      </div>
     </div>
   );
 }

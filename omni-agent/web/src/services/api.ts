@@ -35,6 +35,10 @@ export async function speakText(text: string): Promise<string> {
   return `${base()}${data.audio_url}` as string;
 }
 
+export async function resetHistory(): Promise<void> {
+  await fetch(`${base()}/chat/history`, { method: 'DELETE' });
+}
+
 export async function healthCheck(url: string): Promise<boolean> {
   try {
     const res = await fetch(`${url}/health`, { signal: AbortSignal.timeout(3000) });
