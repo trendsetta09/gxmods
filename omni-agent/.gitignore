@@ -1,0 +1,19 @@
+# Python
+backend/venv/
+backend/__pycache__/
+backend/**/__pycache__/
+backend/*.pyc
+backend/chroma_db/
+backend/static/audio/
+backend/static/screenshots/
+backend/.env
+
+# Node / Expo
+app/node_modules/
+app/.expo/
+app/dist/
+app/web-build/
+
+# OS
+.DS_Store
+Thumbs.db
